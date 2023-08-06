@@ -1,6 +1,6 @@
 {
 	"name": "r3h6/typo3-mail-catcher",
-	"description": "Catch emails instead of sending the out",
+	"description": "Catch emails instead of sending them out",
 	"type": "typo3-cms-extension",
 	"license": [
 		"GPL-2.0-or-later"
