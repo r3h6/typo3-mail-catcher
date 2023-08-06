@@ -4,6 +4,7 @@ use R3H6\MailCatcher\Controller\MessageController;
 
 return [
     'mailcatcher' => [
+        'iconIdentifier' => 'module-mail-catcher',
         'parent' => 'system',
         'position' => ['top'],
         'access' => 'user',
