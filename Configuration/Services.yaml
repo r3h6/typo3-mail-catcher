@@ -8,15 +8,6 @@ services:
     resource: '../Classes/*'
     exclude: '../Classes/Domain/Model/*'
 
-  R3H6\MailCatcher\EventListener\MailCatcher:
-    tags:
-      -
-        name: event.listener
-        method: afterSend
-      -
-        name: event.listener
-        method: beforeSend
-
   R3H6\MailCatcher\Controller\MessageController:
     arguments:
       $mailerDsn: '@extension-configuration.mail-catcher.mailer-dsn'

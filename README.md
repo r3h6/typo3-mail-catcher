@@ -10,9 +10,9 @@ Composer or TER
 
 ## Integration
 
-You must set the mail transport to null:
+You must set the mail transport to `R3H6\\MailCatcher\\Mail\\Transport\\MailCatcherTransport`:
 
 ```PHP
-$GLOBALS['TYPO3_CONF_VARS']['MAIL']['transport'] = 'null'
+$GLOBALS['TYPO3_CONF_VARS']['MAIL']['transport'] = \R3H6\MailCatcher\Mail\Transport\MailCatcherTransport::class;
 ```
 
