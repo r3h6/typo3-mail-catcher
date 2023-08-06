@@ -1,0 +1,57 @@
+<f:layout name="Default" />
+<f:section name="Main">
+
+    <dl class="row">
+        <dt class="col-md-1"><f:translate key="message.from"/></dt>
+        <dd class="col-md-11">{message.from}</dd>
+        <dt class="col-md-1"><f:translate key="message.subject"/></dt>
+        <dd class="col-md-11">{message.subject}</dd>
+        <dt class="col-md-1"><f:translate key="message.to"/></dt>
+        <dd class="col-md-11">{message.to}</dd>
+        <f:if condition="{attachments -> f:count()}">
+            <dt class="col-md-1"><f:translate key="message.attachments"/></dt>
+            <dd class="col-md-11">
+                <f:for each="{attachments}" key="key" as="attachment" iteration="i">
+                    <f:if condition="!{i.isFirst}">, </f:if><f:link.action action="download" arguments="{message: message, attachmentKey: key}" additionalAttributes="{download: ''}">{attachment.filename}</f:link.action>
+                </f:for>
+            </dd>
+        </f:if>
+    </dl>
+
+    <ul class="nav nav-tabs" role="tablist">
+        <f:if condition="{html}">
+            <li class="nav-item">
+                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#html" type="button" role="tab"><f:translate key="message.html"/></button>
+            </li>
+        </f:if>
+        <f:if condition="{text}">
+            <li class="nav-item">
+                <button class="nav-link{f:if(condition: '!{html}', then: ' active')}" data-bs-toggle="tab" data-bs-target="#text" type="button" role="tab"><f:translate key="message.text"/></button>
+            </li>
+        </f:if>
+        <li class="nav-item">
+            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#source" type="button" role="tab"><f:translate key="message.source"/></button>
+        </li>
+    </ul>
+
+    <div id="MessagePreview" class="tab-content">
+        <f:if condition="{html}">
+            <div id="html" class="tab-pane fade show active">
+                <iframe src="{f:uri.action(action: 'preview', arguments: {message: message, partKey: 'html'})}"></iframe>
+            </div>
+        </f:if>
+        <f:if condition="{text}">
+            <div id="text" class="tab-pane fade{f:if(condition: '!{html}', then: ' show active')}">
+                <iframe src="{f:uri.action(action: 'preview', arguments: {message: message, partKey: 'text'})}"></iframe>
+            </div>
+        </f:if>
+        <div id="source" class="tab-pane fade">
+            <pre>
+                {message.source}
+            </pre>
+        </div>
+    </div>
+
+
+    <f:render partial="ForwardModal" arguments="{redirectUri: '{f:uri.action(action: \'show\', addQueryString: 1)}'}" />
+</f:section>

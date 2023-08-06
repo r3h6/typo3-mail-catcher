@@ -1,0 +1,2 @@
+# cat=Mailer; type=string; label=Mailer DSN: Configuration used to allow forwarding messages (https://symfony.com/doc/current/mailer.html#using-built-in-transports).
+mailer_dsn =

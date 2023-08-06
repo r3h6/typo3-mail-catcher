@@ -1,0 +1,66 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers"
+    xmlns:be="http://typo3.org/ns/TYPO3/CMS/Backend/ViewHelpers" data-namespace-typo3-fluid="true">
+
+<f:layout name="Default" />
+<f:section name="Main">
+    <f:variable name="backLink"><f:uri.action absolute="1" action="index" arguments="{page: paginator.currentPageNumber}"/></f:variable>
+
+
+    <h1><f:translate key="index.title"/></h1>
+
+    <f:if condition="{total}">
+        <f:then>
+
+            <p>
+                <f:for each="{pagination.allPageNumbers}" as="pageNumber">
+                    <f:if condition="{pageNumber} == {paginator.currentPageNumber}">
+                        <f:then>
+                            <strong>{pageNumber}</strong>
+                        </f:then>
+                        <f:else>
+                            <f:link.action action="index" arguments="{page: pageNumber}">{pageNumber}</f:link.action>
+                        </f:else>
+                    </f:if>
+
+                </f:for>
+            </p>
+
+            <div class="table-fit">
+                <table class="table table-striped table-hover">
+                    <tbody>
+                        <f:for each="{paginator.paginatedItems}" as="message">
+                            <tr>
+                                <td class="nowrap">{message.to}</td>
+                                <td class="col-title col-responsive nowrap">{message.subject}</td>
+                                <td class="nowrap">
+                                    <f:format.date format="d.m.Y H:i">{message.crdate}</f:format.date>
+                                </td>
+                                <td class="col-control nowrap">
+                                    <f:link.action class="btn btn-default" action="show" arguments="{message: message, backLink: backLink}">
+                                        <core:icon identifier="actions-eye" size="small" />
+                                    </f:link.action>
+                                    <f:if condition="{forwarding}">
+                                        <button class="btn btn-default" type="button"
+                                            title="{f:translate(key: 'modal.forward.title', arguments: {0: message.subject})}"
+                                            data-forward-action="{f:uri.action(action: 'forward', arguments: {message: message})}">
+                                            <core:icon identifier="actions-arrow-right" size="small" />
+                                        </button>
+                                    </f:if>
+                                </td>
+                            </tr>
+                        </f:for>
+                    </tbody>
+
+                </table>
+        </f:then>
+        <f:else>
+            <p><f:translate key="no_messages"/></p>
+        </f:else>
+    </f:if>
+    </div>
+    <f:render partial="ForwardModal" arguments="{redirectUri: backLink}" />
+</f:section>
+
+
+</html>

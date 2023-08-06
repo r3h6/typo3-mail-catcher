@@ -1,0 +1,52 @@
+{
+	"name": "r3h6/typo3-mail-catcher",
+	"description": "Catch emails instead of sending the out",
+	"type": "typo3-cms-extension",
+	"license": [
+		"GPL-2.0-or-later"
+	],
+	"require": {
+		"typo3/cms-core": "^12.4",
+		"typo3/cms-backend": "^12.4"
+	},
+	"autoload": {
+		"psr-4": {
+			"R3H6\\MailCatcher\\": "Classes/"
+		}
+	},
+	"config": {
+		"vendor-dir": ".Build/vendor",
+		"bin-dir": ".Build/bin",
+		"allow-plugins": {
+			"typo3/cms-composer-installers": true,
+			"typo3/class-alias-loader": true
+		}
+	},
+	"extra": {
+		"typo3/cms": {
+			"app-dir": ".Build",
+			"web-dir": ".Build/public",
+			"extension-key": "mail_catcher"
+		}
+	},
+	"replace": {
+		"typo3-ter/mail-catcher": "self.version"
+	},
+	"require-dev": {
+		"typo3/coding-standards": "^0.7.1",
+		"saschaegerer/phpstan-typo3": "^1.8",
+		"friendsofphp/php-cs-fixer": "^3.22",
+		"michielroos/typo3scan": "^1.7"
+	},
+	"scripts": {
+		"ci:php:cs": "PHP_CS_FIXER_IGNORE_ENV=1 php-cs-fixer fix --config .php-cs-fixer.php -v --dry-run --using-cache no --diff",
+		"ci:php:lint": "find *.php Classes Configuration Tests -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l",
+		"ci:php:md": "phpmd Classes/ text phpmd-ruleset.xml",
+		"ci:php:stan": "phpstan --no-progress",
+		"fix:php:cs": "php-cs-fixer fix --config .php-cs-fixer.php",
+		"ci:typo3:deprecation": [
+			"typo3scan scan --target 11 Classes/",
+			"typo3scan scan --target 12 Classes/"
+		]
+	}
+}

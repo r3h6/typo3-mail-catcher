@@ -1,0 +1,13 @@
+<script id="ForwardForm" type="text/template">
+<f:form target="list_frame" action="forward">
+    <div class="input-group">
+        <f:form.hidden name="redirectUri" value="{redirectUri}"/>
+        <f:form.textfield type="email" class="form-control" name="receiverEmail" placeholder="your@email.address" />
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="submit">
+                <core:icon identifier="actions-envelope" size="small" /> <f:translate key="button.send" />
+            </button>
+        </div>
+    </div>
+</f:form>
+</script>

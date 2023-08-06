@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2022-05-21T18:33:51Z">
+		<header>
+			<generator>LFEditor</generator>
+		</header>
+		<body>
+			<trans-unit id="button.deleteAll">
+				<source>Delete all</source>
+			</trans-unit>
+			<trans-unit id="button.back">
+				<source>Close</source>
+			</trans-unit>
+			<trans-unit id="index.title">
+				<source>Mails</source>
+			</trans-unit>
+			<trans-unit id="no_messages">
+				<source>No messages catched!</source>
+			</trans-unit>
+			<trans-unit id="button.send">
+				<source>Send</source>
+			</trans-unit>
+			<trans-unit id="button.forward">
+				<source>Forward</source>
+			</trans-unit>
+			<trans-unit id="modal.forward.title">
+				<source>Forward message '%s'</source>
+			</trans-unit>
+			<trans-unit id="flashMessage.forwarded">
+				<source>Sent message to '%s'</source>
+			</trans-unit>
+			<trans-unit id="message.from">
+				<source>From</source>
+			</trans-unit>
+			<trans-unit id="message.to">
+				<source>To</source>
+			</trans-unit>
+			<trans-unit id="message.subject">
+				<source>Subject</source>
+			</trans-unit>
+			<trans-unit id="message.attachments">
+				<source>Attachments</source>
+			</trans-unit>
+			<trans-unit id="message.html">
+				<source>HTML</source>
+			</trans-unit>
+			<trans-unit id="message.text">
+				<source>Text</source>
+			</trans-unit>
+			<trans-unit id="message.source">
+				<source>Source</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

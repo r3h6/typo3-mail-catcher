@@ -1,0 +1,31 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  R3H6\MailCatcher\:
+    resource: '../Classes/*'
+    exclude: '../Classes/Domain/Model/*'
+
+  R3H6\MailCatcher\EventListener\MailCatcher:
+    tags:
+      -
+        name: event.listener
+        method: afterSend
+      -
+        name: event.listener
+        method: beforeSend
+
+  R3H6\MailCatcher\Controller\MessageController:
+    arguments:
+      $mailerDsn: '@extension-configuration.mail-catcher.mailer-dsn'
+
+  extension-configuration.mail-catcher.mailer-dsn:
+    class: 'string'
+    factory:
+      - '@TYPO3\CMS\Core\Configuration\ExtensionConfiguration'
+      - 'get'
+    arguments:
+      - 'mail_catcher'
+      - 'mailer_dsn'
