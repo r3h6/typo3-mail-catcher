@@ -76,6 +76,7 @@ class MessageController extends ActionController
         $this->view->assign('html', !empty($email->getHtmlBody()));
         $this->view->assign('attachments', $email->getAttachments());
         $this->view->assign('message', $message);
+        $this->view->assign('email', $email);
         $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
         $moduleTemplate->setContent($this->view->render());
 

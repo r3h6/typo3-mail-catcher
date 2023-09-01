@@ -1,13 +1,24 @@
+{namespace m=R3H6\MailCatcher\ViewHelpers}
 <f:layout name="Default" />
-<f:section name="Main">
 
+<f:section name="Main">
     <dl class="row">
+
         <dt class="col-md-1"><f:translate key="message.from"/></dt>
-        <dd class="col-md-11">{message.from}</dd>
+        <dd class="col-md-11">{email.from -> m:format.mimeHeader()}</dd>
         <dt class="col-md-1"><f:translate key="message.subject"/></dt>
-        <dd class="col-md-11">{message.subject}</dd>
+        <dd class="col-md-11">{email.subject}</dd>
         <dt class="col-md-1"><f:translate key="message.to"/></dt>
-        <dd class="col-md-11">{message.to}</dd>
+        <dd class="col-md-11">{email.to -> m:format.mimeHeader()}</dd>
+
+        <f:if condition="{email.cc}">
+            <dt class="col-md-1">CC</dt>
+            <dd class="col-md-11">{email.cc -> m:format.mimeHeader()}</dd>
+        </f:if>
+        <f:if condition="{email.bcc}">
+            <dt class="col-md-1">BCC</dt>
+            <dd class="col-md-11">{email.bcc -> m:format.mimeHeader()}</dd>
+        </f:if>
         <f:if condition="{attachments -> f:count()}">
             <dt class="col-md-1"><f:translate key="message.attachments"/></dt>
             <dd class="col-md-11">

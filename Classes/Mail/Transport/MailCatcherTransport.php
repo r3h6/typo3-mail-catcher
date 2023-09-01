@@ -26,13 +26,18 @@ final class MailCatcherTransport extends AbstractTransport
         assert($message->getOriginalMessage() instanceof Email);
         $newMessage = new Message();
         $newMessage->setMessageId($message->getMessageId());
-        $newMessage->setSubject($message->getOriginalMessage()->getSubject());
-        $newMessage->setFrom(quoted_printable_decode($message->getOriginalMessage()->getHeaders()->get('from')->getBodyAsString()));
-        $newMessage->setTo(quoted_printable_decode($message->getOriginalMessage()->getHeaders()->get('to')->getBodyAsString()));
+        $newMessage->setSubject(quoted_printable_decode($message->getOriginalMessage()->getSubject()));
+        $newMessage->setFrom($this->decode($message->getOriginalMessage()->getHeaders()->get('from')->getBodyAsString()));
+        $newMessage->setTo($this->decode($message->getOriginalMessage()->getHeaders()->get('to')->getBodyAsString()));
         $newMessage->setCrdate(new \DateTime());
         $newMessage->setSerialized(serialize($message->getOriginalMessage()));
         $newMessage->setSource($message->getMessage()->toString());
         GeneralUtility::makeInstance(MessageRepository::class)->add($newMessage);
+    }
+
+    private function decode(string $string): string
+    {
+        return mb_decode_mimeheader(quoted_printable_decode($string));
     }
 
     public function __toString()
