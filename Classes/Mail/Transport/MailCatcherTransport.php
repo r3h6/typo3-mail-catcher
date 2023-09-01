@@ -4,15 +4,18 @@ declare(strict_types=1);
 
 namespace R3H6\MailCatcher\Mail\Transport;
 
-use R3H6\MailCatcher\Domain\Model\Message;
-use R3H6\MailCatcher\Domain\Repository\MessageRepository;
-use Symfony\Component\Mailer\SentMessage;
-use Symfony\Component\Mailer\Transport\AbstractTransport;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Mime\Email;
+use Symfony\Component\Mailer\SentMessage;
+use R3H6\MailCatcher\Domain\Model\Message;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use Psr\EventDispatcher\EventDispatcherInterface;
+use R3H6\MailCatcher\Domain\Repository\MessageRepository;
+use Symfony\Component\Mailer\Transport\AbstractTransport;
 
 final class MailCatcherTransport extends AbstractTransport
 {
+    /** @phpstan-ignore-next-line */
     public function __construct(
         array $mailSettings,
         ?EventDispatcherInterface $dispatcher = null,
